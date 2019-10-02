@@ -10,7 +10,8 @@ namespace string_immutability
     {
         static void Main(string[] args)
         {
-            /*String immutability:
+            /* String immutability:
+             * 
              * One of the special characteristics of a string is that it is immutable, 
              * so it cannot be changed after it has been created. Every change to a 
              * string will create a new string. This is why all of the String manipulation

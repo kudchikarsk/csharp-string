@@ -10,7 +10,7 @@ namespace string_format
     {
         static void Main(string[] args)
         {
-            /* String.Format
+            /* Format Strings
              * 
              * The string.Format method allows a wide range of formatting options for string data. 
              * The first parameter of this method can be passed a string that may look similar to the following:
