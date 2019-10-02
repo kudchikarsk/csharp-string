@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace csharp_string
+namespace string_interning
 {
     class Program
     {
@@ -28,24 +28,27 @@ namespace csharp_string
 
             /*
              * When creating two identical string literals in one compilation unit, the compiler ensures
-             * that only one string object is created by the CLR. 
-             * 
-             * This is called string interning, which is done only at compile time. Like above example
+             * that only one string object is created by the CLR. This is string interning, which is done 
+             * only at compile time. Like in the above example.
              * 
              * Doing it at runtime would incur too much of a performance penalty.
              * Searching through all strings every time you create a new one is too costly.
              * Below are some example where string interning does not work and creates new object in the heap.
              */
 
-            
 
-            var s3 = new String(new char []{ 'h', 'e', 'l', 'l', 'o'}); //string interning not happens here
-            var s4 = String.Copy(s1); //string interning not happens here
 
-            /*
-             * Btw, The string object contains an array of Char objects internally. 
-             * A string has a Length property that shows the number of Char objects it contains.             * 
-             */            
+            var s3 = new String(new char []{ 'h', 'e', 'l', 'l', 'o'}); //string interning will not happen here
+
+            /* The string object contains an array of Char objects internally. 
+             * A string has a Length property that shows the number of Char objects it contains. */
+
+            var s4 = String.Copy(s1); //string interning will not happen here
+
+            /* The static String.Copy(string ...) method creates a new instance of a string by 
+             * copying an existing instance. */
+
+
 
             Console.WriteLine("s1 = {0}", s1);
             Console.WriteLine("s2 = {0}", s2);
@@ -53,7 +56,7 @@ namespace csharp_string
             Console.WriteLine("s4 = {0}", s4);
 
             /*
-             * Let's see the result,
+             * Let's run the program and see the result,
              * Here, ReferenceEquals method determines whether the specified 
              * System.Object instances (String in our case) are the same instance.
              * 
@@ -62,9 +65,9 @@ namespace csharp_string
              * 
              * But, s1 and s2 have reference to same object
              */
-            Console.WriteLine("ReferenceEquals(s1, s2): {0}", ReferenceEquals(s1,s2));                  
-            Console.WriteLine("ReferenceEquals(s1, s3): {0}", ReferenceEquals(s1, s3));            
-            Console.WriteLine("ReferenceEquals(s1, s4): {0}", ReferenceEquals(s1, s4));
+            Console.WriteLine("ReferenceEquals(s1, s2): {0}", ReferenceEquals(s1,s2));  //True
+            Console.WriteLine("ReferenceEquals(s1, s3): {0}", ReferenceEquals(s1, s3)); //False     
+            Console.WriteLine("ReferenceEquals(s1, s4): {0}", ReferenceEquals(s1, s4)); //False
 
             /*
              * The below condition will be true in our case because, String is a reference type 
@@ -72,9 +75,9 @@ namespace csharp_string
              * overloaded to compare on value, not on reference). 
              */
 
-            Console.WriteLine("s1==s2: {0}", s1 == s2);
-            Console.WriteLine("s1==s3: {0}", s1 == s3);
-            Console.WriteLine("s1==s4: {0}", s1 == s4);
+            Console.WriteLine("s1==s2: {0}", s1 == s2); //True
+            Console.WriteLine("s1==s3: {0}", s1 == s3); //True
+            Console.WriteLine("s1==s4: {0}", s1 == s4); //True
 
             Console.ReadLine();
         }
