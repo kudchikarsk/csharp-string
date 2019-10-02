@@ -10,7 +10,8 @@ namespace string_format
     {
         static void Main(string[] args)
         {
-            /*
+            /* String.Format
+             * 
              * The string.Format method allows a wide range of formatting options for string data. 
              * The first parameter of this method can be passed a string that may look similar to the following:
              */
@@ -42,7 +43,24 @@ namespace string_format
              * You can get a complete list of the standard format specifiers here: https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings
              */
 
-            /* ToString:
+            /* String Interpolation:
+             * 
+             * String interpolation available in C# 6.0 and later, interpolated strings are 
+             * identified by the $ special character and include interpolated expressions in braces.
+             * 
+             * String interpolation achieves the same results as the String.Format method, 
+             * but improves ease of use and inline clarity.
+             * 
+             * Use string interpolation to improve the readability and maintainability of your code.
+             */
+
+            Console.WriteLine($"The value of i is {i,5:G}"); //Equivalent to above code
+
+            /* Instead of passing i as second parameter we can directly use variable i within 
+             * the string (in place of index)
+             */
+
+            /* Overriding ToString:
              * In addition to the string.Format and the Console.WriteLine methods, the overloaded ToString 
              * instance method of a value type may also use the previous formatting characters. 
              * 
@@ -59,7 +77,8 @@ namespace string_format
              * for the value type plus any extra text that needs to be supplied.
              */
 
-            /*
+            /* Overriding ToString in System.Object
+             * 
              * Overriding ToString is a good practice. If you don’t do this, ToString will return by 
              * default the name of your type. When you override ToString, you can give it a more meaningful 
              * value, as below code shows.
